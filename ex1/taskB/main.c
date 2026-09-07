@@ -84,7 +84,7 @@ void func(){
 
 
     // ------------------task C: sched_yield--------------------
-    int ns_max_c = 2000;                 // mye større enn 50, syscall koster ~1 us
+    int ns_max_c = 2000;
     int histogram4[ns_max_c];
     memset(histogram4, 0, sizeof(int)*ns_max_c);
     for (int i = 0; i < N; i++) {
