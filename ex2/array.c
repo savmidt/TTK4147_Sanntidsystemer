@@ -104,7 +104,8 @@ void array_reserve(Array *a, long capacity)
     a->data = newData;
     a->front = 0;
     a->back = length;
-    a->capacity = capacity;}
+    a->capacity = capacity;
+}
 
 // Modifiers
 void array_insertBack(Array *a, long stuff)
