@@ -4,6 +4,10 @@
 #include <sys/times.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <string.h>
+#include <sched.h>
+#include <stdint.h>
+#define N (10*1000*1000)
 
 uint64_t rdtsc(void){
     uint64_t val;
@@ -74,12 +78,16 @@ void func(){
     }
     long latency3 = (end_real - start_real) * tick_ns / N;
 
-    for (int i = 0; i < N; i++) {
-        clock_t t1 = times(&start_times);
-        clock_t t2 = times(&end_times);
-        long ns = (long)(t2 - t1) * tick_ns;
-        if (ns >= 0 && ns < ns_max) histogram3[ns]++;
-    }
+    int n_tick_samples = 200;
+    for (int i = 0; i < n_tick_samples; i++) {
+    struct timespec a, b;
+    clock_t t1 = times(&start_times), t2;
+    clock_gettime(CLOCK_MONOTONIC, &a);
+    do { t2 = times(&end_times); } while (t2 == t1);
+    clock_gettime(CLOCK_MONOTONIC, &b);
+    long ns = (b.tv_sec - a.tv_sec)*1000000000L + (b.tv_nsec - a.tv_nsec);
+    int ms = (int)(ns / 1000000L);
+    if (ms >= 0 && ms < ns_max) histogram3[ms]++;}
     long resolution3 = tick_ns;
 
 
@@ -98,9 +106,10 @@ void func(){
 
 
     // print out for plot:
-    // change histogram to 1, 2, 3(Task B) or 4(Task C)
-    for(int i = 0; i < ns_max; i++){
-        printf("%d\n", histogram1[i]);
+    // change histogram to 1, 2, 3(Task B) or 4(Task C) and nbins = ns_max_c
+    int nbins = ns_max_c;
+    for(int i = 0; i < nbins; i++){
+        printf("%d\n", histogram4[i]);
     }
 }
 
