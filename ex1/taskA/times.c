@@ -46,7 +46,7 @@ void busy_wait_alt(double sec_wait){
     clock_t end_real = times(&end);
 
     while(start_real + sec_wait * sysconf(_SC_CLK_TCK) != end_real){
-        for(int i = 0; i < 10000; i++){}
+        // for(int i = 0; i < 10000; i++){}
         end_real = times(&end);
     }
 };

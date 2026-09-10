@@ -107,9 +107,9 @@ void func(){
 
     // print out for plot:
     // change histogram to 1, 2, 3(Task B) or 4(Task C) and nbins = ns_max_c
-    int nbins = ns_max_c;
+    int nbins = ns_max;
     for(int i = 0; i < nbins; i++){
-        printf("%d\n", histogram4[i]);
+        printf("%d\n", histogram1[i]);
     }
 }
 
