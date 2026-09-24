@@ -1,8 +1,8 @@
-TARGET = taskA
+TARGET = taskB
 
 CC = clang
 # For taskB, use these in CDFLAGS: -g -fsanitize=thread
-CFLAGS = -std=gnu11
+CFLAGS = -std=gnu11 -g -fsanitize=thread
 LDFLAGS = -lpthread
 
 SRCS = $(wildcard *.c)

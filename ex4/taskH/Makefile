@@ -1,8 +1,7 @@
-TARGET = taskG
+TARGET = taskH
 
 CC = clang
-# Add -fsanitize=thread for taskG
-CFLAGS = -std=gnu11 -fsanitize=thread
+CFLAGS = -std=gnu11 
 LDFLAGS = -lpthread
 
 SRCS = $(wildcard *.c)
