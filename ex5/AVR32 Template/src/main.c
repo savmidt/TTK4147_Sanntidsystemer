@@ -44,6 +44,13 @@ int main (void){
     init();
     
     while(1){
+        while(gpio_get_pin_value(TEST_A) == 1){}  // wait until TEST A goes low
+        gpio_set_pin_low(RESPONSE_A);             // respond
+        while(gpio_get_pin_value(TEST_A) == 0){}  // hold until BRTT releases TEST A
+        gpio_set_pin_high(RESPONSE_A);            // back to idle
+    }
+    
+    while(1){
         gpio_toggle_pin(LED0_GPIO);
 
         printf("tick\n");
