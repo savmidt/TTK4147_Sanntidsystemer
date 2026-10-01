@@ -1,0 +1,19 @@
+Answers:
+
+Task A:
+
+Task B:
+
+As for A having the lowest maximum, could this be because it is always polled first?
+The responses look almost the same, but the averages are A, B and C with highest. Their distribution also varies a bit with C having more instances in the 10 and 20 us range. 
+
+
+Task C:
+
+Much higher average, however: maximum time is significantly lower, almost half.
+
+Task D:
+
+Deferred has higher averages and maximums in both scenarios. This is because we added an extra step to the calculation. When all three measurements are in the same loop, the deferral gives no benefit as they are all blocked while ISR is running. This means that the added time is basically the cost of deferral
+
+For the "expensive B", the interrupt-handler is least impactful on the response of A and C.
