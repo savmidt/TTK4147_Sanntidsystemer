@@ -1,0 +1,20 @@
+Answers ex 6
+
+Task B
+The average times are significantly lower with yielding, although WCRT are much higher without yielding, which is what we care about in RTA.
+
+This may be because when a task is finished it goes to the back of the queue and therefore will wait behind other tasks and not run immediately, increasing the maximum times, and lowering the average for all other tasks, because now they are allowed to run.
+
+
+Task C
+Pin C needs 3ms of work every test, however round robin only provides 1ms per cycle to every task, and pin A and B only need 1ms to run once. Pin A and B waste time with busy_delay which C could have used.
+
+Changing priority doesnt help because C gets higher priority and always has something to do, which makes A and B never get CPU-time and starve. Same goes for if A and B get higher priority: C will starve.
+
+
+Task D
+Both the average and WCRT for C went down. The vTaskDelay(1) means that the task yields its time, and the CPU time can go towards another task.
+
+If the main function was like a giant while, calling the tasks one after another with their individual while-loops, one could argue that the vTaskDelay works like a break inside the tasks individual while-loop? However this is contrary to how FreeRTOS operates, because any function should never return anything, since that could cause a crash.
+
+Task E
