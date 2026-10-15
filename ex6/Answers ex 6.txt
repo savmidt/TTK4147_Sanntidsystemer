@@ -13,8 +13,9 @@ Changing priority doesnt help because C gets higher priority and always has some
 
 
 Task D
-Both the average and WCRT for C went down. The vTaskDelay(1) means that the task yields its time, and the CPU time can go towards another task.
+Both the average and WCRT for C went down. The vTaskDelay(1) means that the task blocks the rest of its time, and the CPU time can go towards another task, after the blocking.
 
 If the main function was like a giant while, calling the tasks one after another with their individual while-loops, one could argue that the vTaskDelay works like a break inside the tasks individual while-loop? However this is contrary to how FreeRTOS operates, because any function should never return anything, since that could cause a crash.
 
 Task E
+By giving channel A and B higher priority, both the maximum and average execution times for A and B become lower.This is because channel C will now be blocked and preempted by A and B as soon as they wake on a tick.
